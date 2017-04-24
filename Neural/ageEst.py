@@ -125,11 +125,11 @@ def getData():
 		filename2=filename.replace('_','-')
 		filename2=filename2.replace('.','-')
 		fileWords = filename2.split('-')
-		age = calcAge(fileWords[3], fileWords[4], fileWords[2], fileWords[1])
-		picData = plt.imread(directory + '/' + filename)
+		
 
 		try :
-
+			age = calcAge(fileWords[3], fileWords[4], fileWords[2], fileWords[1])
+			picData = plt.imread(directory + '/' + filename)
 			# Add another row to our data array
 			data[i] = np.swapaxes(picData, 0, 2)
 			ages[i,0] = age
