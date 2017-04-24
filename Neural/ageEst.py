@@ -187,11 +187,14 @@ if __name__ == "__main__":
 
 
 	for filename in os.listdir(PATH):
-		im = plt.imread(PATH + '/' + filename)
+		try:
+			im = plt.imread(PATH + '/' + filename)
 
-		out = model.predict(im)
-		print("PREDICTION")
-		print np.argmax(out)
+			out = model.predict(im)
+			print("PREDICTION")
+			print np.argmax(out)
+		except:
+			pass
 
 	np.savetext('dataTry2.out', )
 
