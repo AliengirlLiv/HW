@@ -118,6 +118,7 @@ def getData():
 
 	#Loop through files
 	i=0
+	badPics=0
 	for filename in os.listdir(directory):
 
 		#Filename format: 42691_1901-11-03_1974.jpg
@@ -132,10 +133,17 @@ def getData():
 			# Add another row to our data array
 			data[i] = np.swapaxes(picData, 0, 2)
 			ages[i,0] = age
+			i += 1
 			print("good pic")
 		except:
 			print ("aaa another weird pic")
-		i += 1
+			badPics += 1
+
+	# Delete empty rows
+	badRows = [numPics - 1 - x for x in range(badPics)]
+	data = numpy.delete(data, badRows, axis=0)
+	ages = numpy.delete(ages, badRows, axis=0)
+		
 	print("AGES: ")
 	print(ages)
 	return (data, ages)
@@ -187,9 +195,9 @@ if __name__ == "__main__":
 
 
 	for filename in os.listdir(PATH):
+
 		try:
 			im = plt.imread(PATH + '/' + filename)
-
 			out = model.predict(im)
 			print("PREDICTION")
 			print np.argmax(out)
